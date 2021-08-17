@@ -8,7 +8,7 @@ sigma_noise=.01;
 %% Parameters for AVS
 ITR_AVS=1e3;
 N=100;
-M=40;
+M=20;
 %r=2;
 Sense_out=zeros(N,1);
 supp_out=zeros(N,1);
@@ -29,7 +29,7 @@ for l=1:length(r_vec)
     parfor itr=1:ITR_AVS
         itr;
         %[~,MSE_out(itr),Sensing_Profile]=AVS_SparseGaussian_Haar(r,N,M,sigma_noise,sparsity);
-        [~,MSE_out(itr),Sensing_Profile,support_X,MSE_old(itr)]=AVS_SparseGaussian_IID_Bayes(r,N,M,sigma_noise,sparsity,10^(D_th/10));
+        [~,MSE_out(itr),Sensing_Profile,support_X,MSE_old(itr)]=AVS_SparseGaussian_IID_Bayes1(r,N,M,sigma_noise,sparsity,10^(D_th/10));
         %
 %         [~,MSE_out(itr),Sensing_Profile,MSE_old(itr)]=AVS_SparseGaussian_IID(r,N,M,sigma_noise,sparsity);
         
@@ -67,7 +67,7 @@ figure(1)
 hold on
 plot(r_vec,MSE_AVS_dB,'-o')
 plot(r_vec,MSE_VAMP_dB,'-o')
-legend('AVS(M=40)','VAMP(M=40)')
+legend('AVS(M=40times)','VAMP(M=40times)')
 xlabel('compression rate N/K')
 ylabel('MSE(dB)')
 hold on
